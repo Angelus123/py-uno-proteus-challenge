@@ -2,16 +2,19 @@ from cvzone.HandTrackingModule import HandDetector
 from cvzone.FaceDetectionModule import FaceDetector
 import cv2
 import serial
+import datetime
+datetime.datetime.now()
+datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
+print(datetime.datetime.now())
 import time
 
-arduino = serial.Serial('COM2', 9600)
+arduino = serial.Serial('COM5', 9600)
 time.sleep(2)
 
 cap = cv2.VideoCapture(0)
 
 detector = HandDetector(detectionCon =0.8, maxHands=1)
 faceDetector = FaceDetector()
-
 while True:
     # Get image frame
     success, img = cap.read()
@@ -35,19 +38,27 @@ while True:
         # bboxInfo - "id","bbox","score","center"
         center = bboxs[0]["center"]
         print(f'{bboxs[0]["score"]}') 
-        cv2.circle(img, center, 5, (255, 0, 255), cv2.FILLED)
+        cv2.circle(img, center, 5, ( 255, 0, 255), cv2.FILLED )
         faceScore =  bboxs[0]["score"]
 
         print(f'Finger Array {fingers1}, Face Score {faceScore[0]}') 
-        if fingers1 == [0,1,0,0,0] and faceScore[0]>0.87 :
+        if fingers1 == [0,1,0,0,0] and faceScore[0]>0.50 :
+            time.sleep(1) # Sleep for 5 seconds
             arduino.write(b'd')
             print(f'Doctor') 
-        if fingers1 == [0,1,1,0,0] and faceScore[0]>0.87 :
-            print(f'Cleaner') 
+            time.sleep(5) # Sleep for 5 seconds
+        if fingers1 == [0,1,1,0,0] and faceScore[0]>0.50 :
+            time.sleep(1) # Sleep for 5 seconds 
             arduino.write(b'c')
-        if fingers1 == [1,1,1,0,0]and faceScore[0]>0.87 :
+            print(f'Cleaner')
+            time.sleep(2) # Sleep for 5 seconds
+            
+            time.sleep(5) # Sleep for 5 seconds
+        if fingers1 == [1,1,1,0,0]and faceScore[0]>0.57 :
             print(f'Restaurent') 
+            time.sleep(1) # Sleep for 5 seconds
             arduino.write(b'r')
+            time.sleep(2) # Sleep for 5 seconds
 
     cv2.imshow("Image", img)
     cv2.waitKey(1)
