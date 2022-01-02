@@ -50,6 +50,7 @@ void loop(){
   }
   
   if (receivedData == 'd')
+  
   {
     sms.beginSMS("0785182823");
     sms.print("Hey Izere I am testing!");
@@ -58,6 +59,7 @@ void loop(){
     digitalWrite (led, HIGH);
     digitalWrite (led1, LOW);
     digitalWrite (led2, LOW);
+    delay(1000)
   }
   else if (receivedData == 'c')
   {
@@ -67,6 +69,7 @@ void loop(){
     digitalWrite (led, LOW);
     digitalWrite (led1, HIGH);
     digitalWrite (led2, LOW);
+    delay(1000)
   }
   else if (receivedData == 'r')
   {
@@ -76,5 +79,6 @@ void loop(){
     digitalWrite (led, LOW);
     digitalWrite (led1, LOW);
     digitalWrite (led2, HIGH);
+    delay(1000)
   }
 }
