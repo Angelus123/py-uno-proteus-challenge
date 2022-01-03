@@ -35,7 +35,7 @@ void setup()
       notConnected = false;
     } else {
       Serial.println("Not connected");
-      delay(1000);
+  
     }
   }
 
@@ -44,41 +44,34 @@ void setup()
 
 
 void loop(){
-  while(Serial.available())
-  {
-    receivedData = Serial.read();
-  }
-  
+  receivedData = Serial.read();
   if (receivedData == 'd')
   
   {
     sms.beginSMS("0785182823");
-    sms.print("Hey Izere I am testing!");
+    sms.print("Hey Doctor I am testing!");
     sms.endSMS();
     Serial.println("\nWOW!\n");
     digitalWrite (led, HIGH);
     digitalWrite (led1, LOW);
     digitalWrite (led2, LOW);
-    delay(1000)
   }
   else if (receivedData == 'c')
   {
-    sms.beginSMS("0781917267");
-    sms.print("Hey Cyifuzo  I am testing!");
+    sms.beginSMS("0781789636");
+    sms.print("Hey My Cleaner,  I am testing!");
     sms.endSMS();
     digitalWrite (led, LOW);
     digitalWrite (led1, HIGH);
     digitalWrite (led2, LOW);
-    delay(1000)
   }
   else if (receivedData == 'r')
   {
-     sms.beginSMS("0780837606");
-     sms.print("Hey Odile I am testing!");
+     sms.beginSMS("0787012307");
+     sms.print("Hey lovly Restaurent, I am testing!");
      sms.endSMS();
     digitalWrite (led, LOW);
     digitalWrite (led1, LOW);
     digitalWrite (led2, HIGH);
-    delay(1000)
   }
 }

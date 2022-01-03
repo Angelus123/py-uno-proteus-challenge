@@ -8,7 +8,7 @@ datetime.datetime(2009, 1, 6, 15, 8, 24, 78915)
 print(datetime.datetime.now())
 import time
 
-arduino = serial.Serial('COM5', 9600)
+arduino = serial.Serial('COM4', 9600)
 time.sleep(2)
 
 cap = cv2.VideoCapture(0)
@@ -43,20 +43,16 @@ while True:
 
         print(f'Finger Array {fingers1}, Face Score {faceScore[0]}') 
         if fingers1 == [0,1,0,0,0] and faceScore[0]>0.50 :
-            time.sleep(1) # Sleep for 5 seconds
             arduino.write(b'd')
             print(f'Doctor') 
             time.sleep(5) # Sleep for 5 seconds
-        if fingers1 == [0,1,1,0,0] and faceScore[0]>0.50 :
-            time.sleep(1) # Sleep for 5 seconds 
+        if fingers1 == [0,1,1,0,0] and faceScore[0]>0.50 : 
             arduino.write(b'c')
             print(f'Cleaner')
             time.sleep(2) # Sleep for 5 seconds
-            
             time.sleep(5) # Sleep for 5 seconds
         if fingers1 == [1,1,1,0,0]and faceScore[0]>0.57 :
             print(f'Restaurent') 
-            time.sleep(1) # Sleep for 5 seconds
             arduino.write(b'r')
             time.sleep(2) # Sleep for 5 seconds
 
